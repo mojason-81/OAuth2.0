@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta name="google-signin-client_id" content="290256225589-56mcs0o34p9ec9o1u26lotr5dhd81f74.apps.googleusercontent.com">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+  </head>
+  <body>
+
+    <div id="my-signin2"></div>
+
+    <script>
+      function onSuccess(googleUser) {
+        if (googleUser) {
+          $('#my-signin2').html('Login Successful!<br />' + googleUser.getBasicProfile().getName() + '<br />Redirecting...');
+          setTimeout(function() {
+            window.location.href = "/restaurant";
+          }, 4000);
+        }
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      }
+      function onFailure(error) {
+        console.log(error);
+      }
+      function renderButton() {
+        gapi.signin2.render('my-signin2', {
+          'scope': 'profile email',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': onSuccess,
+          'onfailure': onFailure
+        });
+      }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  </body>
+</html>
